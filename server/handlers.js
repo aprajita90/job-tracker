@@ -96,5 +96,20 @@ getUser: function(req, res) {
   uploadFile: function(req, res) {
     console.log(req);
     res.json({success : true});
+  },
+  
+  updateUser : function(req,res){
+    var username = req.user.username;
+
+    var user = req.body;
+    userController.updateUserInDb(user, username)
+    .then(function(resp) {
+      //getUser(req,res)
+      res.send(resp)
+    })
+    .catch(function(err) {
+      console.error(err);
+      res.sendStatus(204);
+    });
   }
 };
